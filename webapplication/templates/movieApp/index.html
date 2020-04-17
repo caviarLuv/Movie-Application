@@ -4,11 +4,30 @@
 	<h2>Registration</h2>
 	User name: <input type="text" name="user_name">
 	<br>
-	Password: <input type="text" name="password">
+	Password: <input type="password" name="password">
 	<br>
 	<input type="submit" name="register" value="register">
 </form>
 
-<h2>Display information in database</h2>
-{% for user in users %}
+<h2>Display information in database (10 movies from movies collection)</h2>
+{% for movie in movies %}
+	<p>{{ movie.title }}</p>
 {% endfor %}
+
+<form action="/index" method="POST">
+	{% csrf_token %}
+	<h2>Delete movie entry (Not implemented yet)</h2>
+	Movie name: <input type="text" name="movie_name">
+	<input type="submit" name="remove_movie" value="remove">
+</form>
+
+
+
+<form action="/index" method="POST">
+	{% csrf_token %}
+	<h2>Add movie tag (Not implemented yet)</h2>
+	Movie name: <input type="text" name="movie_name">
+	<br>
+	Add new tag: <input type="text" name="new_tag">
+	<input type="submit" name="update" value="update">
+</form>

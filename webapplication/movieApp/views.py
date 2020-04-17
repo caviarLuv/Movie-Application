@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from .db_conn import *
 
 def index(request):
+	conn = db_conn()
 	if request.method == 'POST':
-		conn = db_conn()
 		db = conn.test
 		users = db.users
 		username = request.POST.get('user_name')
@@ -14,4 +14,6 @@ def index(request):
 			"password": pw
 		}
 		users.insert_one(user)
-	return render(request, 'movieApp/index.html')
+	movies = conn.test.movies.find().limit(10)
+	conn.close()
+	return render(request, 'movieApp/index.html', {'movies':movies})
