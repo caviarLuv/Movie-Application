@@ -1,0 +1,14 @@
+<h1>Movie App Testing</h1>
+<form action="/index" method="POST">
+	{% csrf_token %}
+	<h2>Registration</h2>
+	User name: <input type="text" name="user_name">
+	<br>
+	Password: <input type="text" name="password">
+	<br>
+	<input type="submit" name="register" value="register">
+</form>
+
+<h2>Display information in database</h2>
+{% for user in users %}
+{% endfor %}
