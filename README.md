@@ -50,14 +50,17 @@ python3 webapplication/manage.py runserver
 Movie-Application
 |_webapplication          //project name
   |_ manage.py            //main script to start server
+  |_ static               //static folder to hold js and map files
+    |_ movieApp           //for movieApp view
   |_ movieApp             //application name
     |_urls.py             //for application routing purpose
     |_views.py            //application view (right now is combined with database operation)
     |_db_conn.py          //mongodb connector (maybe group the database operation here later...)
-  |_ templates            //storing html code/html template
+  |_ templates            //storing html code/html template, ******currently angular testpage is here
     |_ movieApp           //store specific html for movieApp
   |_ webapplication       //project settings
     |_settings.py         //django settings
     |_wsgi.py             // probably only need it for deployment
+|_frontend                //Angular is build here
 
 ```
