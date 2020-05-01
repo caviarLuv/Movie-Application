@@ -6,7 +6,9 @@ from rest_framework import routers
  
  
 router = routers.DefaultRouter()
- 
+#router.register(r'movies', views.MovieView)
 urlpatterns = [
-    url(r'^$', views.HomePageView.as_view()),
+	url(r'^movies/$', views.MovieView.as_view()),
+	#path('index', views.index),
+    url(r'^$', include(router.urls)),
 ]
