@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,12 +16,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MovieComponent } from './movie/movie.component';
+import { ProfileComponent } from './profile/profile.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MovieListComponent,
     SignupComponent
+    MovieComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule, 
     ReactiveFormsModule
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

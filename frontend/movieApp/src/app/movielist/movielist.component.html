@@ -1,7 +1,7 @@
-<mat-list>
+<mat-nav-list>
   <div mat-subheader>Movies</div>
-  <mat-list-item *ngFor="let movie of movies">
-    <mat-icon mat-list-icon>movie</mat-icon>
-    <div mat-line>{{movie.title}}</div>
+  <mat-list-item *ngFor="let movie of movies" (click)="viewMovie(movie.title)">
+      <mat-icon mat-list-icon>movie</mat-icon>
+      <span>{{movie.title}}</span>
   </mat-list-item>
-</mat-list>
+</mat-nav-list>
