@@ -9,14 +9,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MovieListComponent } from './movielist/movielist.component';
-import { MatIconModule } from '@angular/material/icon'
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { SignupComponent } from './signup/signup.component'
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MovieListComponent
+    MovieListComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,12 @@ import { MatIconModule } from '@angular/material/icon'
     BrowserAnimationsModule,
     MatToolbarModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

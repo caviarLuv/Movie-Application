@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">signup</mat-toolbar>
+<form [formGroup]='signupForm' (ngSubmit)="onSubmit(signupForm.value)">
+	<mat-list>
+		<mat-list-item><mat-form-field>
+			<mat-label>	Username </mat-label>
+			<input type="text" formControlName="username" matInput>	
+		</mat-form-field></mat-list-item>
+
+		<mat-list-item><mat-form-field>
+			<mat-label>	Password </mat-label>
+			<input type="password" formControlName="pw" matInput>	
+		</mat-form-field></mat-list-item>
+
+		<mat-list-item>
+			<mat-label>	Interested Genre(s): </mat-label>
+		</mat-list-item>
+
+		
+		<mat-label formArrayName="liked_genres" *ngFor="let genre of signupForm.controls.liked_genres.controls; let i = index"> 
+			<mat-checkbox [formControlName]="i" class="genre-margin"> {{genres[i]}}  </mat-checkbox>
+		</mat-label>
+	
+
+		<mat-list-item>
+			<button type="submit" mat-button color="primary">Sign-up</button>
+		</mat-list-item>
+
+	</mat-list>
+</form>
