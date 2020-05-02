@@ -78,7 +78,8 @@ WSGI_APPLICATION = 'webapplication.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:4200',
-    'http://localhost:4200'
+    'http://localhost:4200',
+    'http://localhost:8000'
 ]
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

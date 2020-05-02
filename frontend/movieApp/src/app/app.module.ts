@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { MovieListComponent } from './movielist/movielist.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MovieComponent } from './movie/movie.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { MovieComponent } from './movie/movie.component';
     AppComponent,
     HeaderComponent,
     MovieListComponent,
-    MovieComponent
+    MovieComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { MovieComponent } from './movie/movie.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
