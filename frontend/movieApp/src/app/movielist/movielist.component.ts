@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,9 @@ import { ApiService } from '../api.service';
 export class MovieListComponent {
   movies = [{title: 'test'}];
 
-  constructor(private api: ApiService) {
+  constructor(
+    private api: ApiService,
+    private router: Router) {
     this.getMovies();
   }
 
@@ -25,5 +28,9 @@ export class MovieListComponent {
         console.log(error);
       }
     );
+  }
+
+  viewMovie(movieId: string) {
+    this.router.navigate(['/movie/' + movieId]);
   }
 }

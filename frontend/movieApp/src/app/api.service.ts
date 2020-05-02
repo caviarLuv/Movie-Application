@@ -11,6 +11,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getAllMovies(): Observable<any>{
-  	return this.http.get(this.baseurl + '/movies', {headers: this.httpHeaders});
-  	}
+    return this.http.get(this.baseurl + '/movies', {headers: this.httpHeaders});
+  }
 }
