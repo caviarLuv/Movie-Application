@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -31,8 +32,11 @@ export class SignupComponent {
 		"War",
 		"Western"
 	];
-  constructor(private api: ApiService, private formBuilder:FormBuilder) 
-  { 
+  constructor(
+    private api: ApiService,
+    private formBuilder: FormBuilder,
+    private router: Router)
+  {
   	this.signupForm = this.formBuilder.group({
   		username: '',
   		pw: '',
@@ -60,11 +64,13 @@ export class SignupComponent {
   }
 
   createUser(userData) {
-  	console.warn('creating', userData);
-  	this.api.createUser(userData).subscribe(
-  		data=> {console.log("user in database? "+data.succeed)},
-  		error=>{console.log(error)}
-  		);
+    console.warn('creating', userData);
+    this.api.createUser(userData).subscribe(
+      data => {
+        console.log('user in database? ' + data.succeed);
+        this.router.navigate(['/']);
+      },
+      error => {console.log(error); }
+    );
   }
-
 }

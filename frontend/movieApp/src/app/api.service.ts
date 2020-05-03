@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,7 @@ export class ApiService {
   public token_expires: Date;
   public username;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getAllMovies(): Observable<any>{
     return this.http.get(this.baseurl + '/movies', {headers: this.httpHeaders});
@@ -21,13 +23,18 @@ export class ApiService {
   getMovie(movieId: string): Observable<any>{
     return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
+
   createUser(userData): Observable<any> {
   	return this.http.post(this.baseurl+'/signup/', userData);
   }
 
   userLogin(userData) {
   	this.http.post(this.baseurl+ '/api-token-auth/', userData).subscribe(
-  		data => {this.updateData(data['token']); console.log(this.username+" token: "+ this.token)},
+  		data => {
+               this.updateData(data['token']); 
+               console.log(this.username+" token: "+ this.token);
+               this.router.navigate(['/']);
+              },
   		error => {
   			console.log(error);
   		});
