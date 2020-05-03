@@ -4,8 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { MovieListComponent } from './movielist/movielist.component';
 import { MovieComponent } from './movie/movie.component';
 import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
-import { SigninComponent } from './signin/signin.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth-guard';
+// import { SignupComponent } from './signup/signup.component';
+// import { SigninComponent } from './signin/signin.component';
 
 
 const routes: Routes = [
@@ -14,11 +17,12 @@ const routes: Routes = [
   { path: 'movie/:movieId', component: MovieComponent},
   { path: 'profile/:userId', component: ProfileComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'login', component: SigninComponent }
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule { }

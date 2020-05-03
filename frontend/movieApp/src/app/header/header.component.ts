@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { Subscription } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -9,19 +11,30 @@ import { ApiService } from '../api.service';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
-  constructor(private router: Router, private api: ApiService) {}
+export class HeaderComponent implements OnInit, OnDestroy{
+  private authListenerSubs: Subscription;
+  userIsAuthenticated = false;
+  username: string;
+  constructor(private router: Router, private api: ApiService, private authService: AuthService) {}
+
+  ngOnInit() {
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authListenerSubs = this.authService
+        .getAuthStatusListener()
+        .subscribe(isAuthenticated => {
+            this.userIsAuthenticated = isAuthenticated;
+            this.username = this.authService.getUsername();
+        });
+  }
 
   viewProfile() {
-    this.router.navigate(['/profile/' + '23']);
+    console.log(this.authService.getUsername);
+    this.router.navigate(['/profile/' + localStorage.getItem('username')]);
   }
 
-  logged_in = this.api.username;
-  logout() {
-  	console.log("logged out");
-  	this.logged_in = null;
-    this.api.userLogout();
-    this.router.navigate(['']);
+  onLogout() {
+    this.authService.logout();
   }
 
+  ngOnDestroy() {}
 }
