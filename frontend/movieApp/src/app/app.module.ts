@@ -14,10 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { SignupComponent } from './signup/signup.component'
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovieComponent } from './movie/movie.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SigninComponent } from './signin/signin.component';
 
 
 @NgModule({
@@ -25,9 +25,10 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     HeaderComponent,
     MovieListComponent,
-    SignupComponent
+    SignupComponent,
     MovieComponent,
-    ProfileComponent
+    ProfileComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,6 @@ import { ProfileComponent } from './profile/profile.component';
     MatButtonModule,
     FormsModule, 
     ReactiveFormsModule
-    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

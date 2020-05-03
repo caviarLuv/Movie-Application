@@ -10,6 +10,7 @@ import { FormBuilder, FormArray, FormControl } from '@angular/forms';
 })
 export class SignupComponent {
 	signupForm;
+	succeed=false;
 	genres = [
 		"Action",
 		"Adventure",
@@ -30,7 +31,7 @@ export class SignupComponent {
 		"War",
 		"Western"
 	];
-  constructor(private formBuilder:FormBuilder) 
+  constructor(private api: ApiService, private formBuilder:FormBuilder) 
   { 
   	this.signupForm = this.formBuilder.group({
   		username: '',
@@ -59,9 +60,11 @@ export class SignupComponent {
   }
 
   createUser(userData) {
-  	let salt;
-  	let hashedpw;
   	console.warn('user created', userData);
+  	this.api.createUser(userData).subscribe(
+  		data=> {console.log("user in database? "+data.succeed+"pw"+data.pwhashed)},
+  		error=>{console.log(error)}
+  		);
   }
 
 }
