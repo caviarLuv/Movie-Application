@@ -79,7 +79,7 @@ def addMovieToList(request):
 	conn = db_conn()
 	user = conn.movieApp.users.find_one({"username": un})
 	if user != None:
-		conn.movieApp.users.update_one({"username": un}, {"$push": {"movie_list": movieId}})
+		conn.movieApp.users.update_one({"username": un}, {"$addToSet": {"movie_list": movieId}})
 	conn.close()
 
 
