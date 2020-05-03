@@ -82,4 +82,18 @@ def addMovieToList(request):
 		conn.movieApp.users.update_one({"username": un}, {"$addToSet": {"movie_list": movieId}})
 	conn.close()
 
+@api_view(['POST'])
+def deleteMoviefromList(request):
+	un = request.data['username']
+	movieId = request.data['movieId']
+	conn = db_conn()
+	#delete the movie from userlist
+	db = conn.movieApp
+	user = db.users.find_one({"username":un})
+	if user != None:
+		db.users.update({'username':un},{'$pull':{'movie_list':movieId}})
+	conn.close()
+	return Response({"Movie Deleted Successfully"})
+
+
 
