@@ -10,9 +10,6 @@ export class ApiService {
 
   baseurl = "http://127.0.0.1:8000";
   httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
-  public token: string;
-  public token_expires: Date;
-  public username;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -24,35 +21,34 @@ export class ApiService {
     return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
 
-  createUser(userData): Observable<any> {
-  	return this.http.post(this.baseurl+'/signup/', userData);
+  addMovie(movieId: string, username: string) {
+    const formData = new FormData();
+    formData.append('movieId', movieId);
+    formData.append('username', username);
+    console.log(username + ' ' + movieId);
+    this.http
+            .put<{ message: string; movie: string; user: string}>(
+                this.baseurl + '/movie/' + movieId,
+                formData
+            )
+            .subscribe(responseData => {
+                this.router.navigate(['/' + username]);
+            });
   }
 
-  userLogin(userData) {
-  	this.http.post(this.baseurl+ '/api-token-auth/', userData).subscribe(
-  		data => {
-               this.updateData(data['token']); 
-               console.log(this.username+" token: "+ this.token);
-               this.router.navigate(['/']);
-              },
-  		error => {
-  			console.log(error);
-  		});
+  removeMovie(movieId: string, username: string) {
+    const formData = new FormData();
+    formData.append('movieId', movieId);
+    formData.append('username', username);
+    console.log(username + ' ' + movieId);
+    this.http
+            .put<{ message: string; movie: string; user: string}>(
+                this.baseurl + '/movie/' + movieId,
+                formData
+            )
+            .subscribe(responseData => {
+                this.router.navigate(['/' + username]);
+            });
   }
-
-  userLogout() {
-  	this.token = null;
-  	this.username = null;
-  	this.token_expires = null;
-  }
-
-   private updateData(token) {
-  	this.token = token;
-  	const token_parts = this.token.split(/\./);
-  	const token_decoded = JSON.parse(window.atob(token_parts[1]));
-  	this.token_expires = new Date(token_decoded.exp * 1000);
-  	this.username = token_decoded.username;
-	}
-
 }
 

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth/auth.service';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,18 +11,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie.component.css']
 })
 
-export class MovieComponent implements OnInit {
+export class MovieComponent implements OnInit, OnDestroy {
+  private authListenerSubs: Subscription;
+  userIsAuthenticated = false;
+  username: string;
   movie = {
     title: 'test',
     desc: 'this is a test description',
     date: '1999'
   };
-
+  movieExists = false;
   movieId;
 
   constructor(
     private api: ApiService,
     private router: ActivatedRoute,
+    private authService: AuthService
     ) {
       // this.getMovie();
     }
@@ -28,8 +34,14 @@ export class MovieComponent implements OnInit {
     ngOnInit() {
       this.router.paramMap.subscribe(params => {
         this.movieId = params.get('movieId');
-        console.log(this.movieId);
       });
+      this.userIsAuthenticated = this.authService.getIsAuth();
+      this.authListenerSubs = this.authService
+        .getAuthStatusListener()
+        .subscribe(isAuthenticated => {
+            this.userIsAuthenticated = isAuthenticated;
+            this.username = this.authService.getUsername();
+        });
     }
 
     getMovie = () => {
@@ -42,5 +54,15 @@ export class MovieComponent implements OnInit {
         }
       );
     }
+
+    addMovie() {
+      this.api.addMovie(this.movieId, localStorage.getItem('username'));
+    }
+
+    removeMovie() {
+      this.api.removeMovie(this.movieId, this.username);
+    }
+
+    ngOnDestroy() {}
 }
 
