@@ -83,6 +83,20 @@ def addMovieToList(request):
 	conn.close()
 	return Response({"succeed": "movie is added!"}, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def deleteMoviefromList(request):
+	un = request.data['username']
+	movieId = request.data['movieId']
+	conn = db_conn()
+	#delete the movie from userlist
+	db = conn.movieApp
+	user = db.users.find_one({"username":un})
+	if user != None:
+		db.users.update({'username':un},{'$pull':{'movie_list':movieId}})
+	conn.close()
+	return Response({"Movie Deleted Successfully"})
+
+
 
 @api_view(['GET'])
 def top10Movies(request):
