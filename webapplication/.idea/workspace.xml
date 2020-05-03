@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bf9b23c-f4f5-4b58-af5e-c195616a0a22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/movieApp/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/movieApp/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signin/signin.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signin/signin.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signin/signin.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signin/signin.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signup/signup.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signup/signup.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signup/signup.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/signup/signup.component.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
