@@ -60,9 +60,9 @@ export class SignupComponent {
   }
 
   createUser(userData) {
-  	console.warn('user created', userData);
+  	console.warn('creating', userData);
   	this.api.createUser(userData).subscribe(
-  		data=> {console.log("user in database? "+data.succeed+"pw"+data.pwhashed)},
+  		data=> {console.log("user in database? "+data.succeed)},
   		error=>{console.log(error)}
   		);
   }
