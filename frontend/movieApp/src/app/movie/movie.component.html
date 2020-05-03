@@ -1,3 +1,6 @@
-<h1>{{ movie.title }}</h1>
-<h2>{{ movie.desc }}</h2>
-<h3>{{ movie.date }}</h3>
+<mat-list>
+  <div mat-subheader>{{ movie.title }}</div>
+  <mat-list-item>Description: {{ movie.desc }}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>Release Date: {{ movie.date }}</mat-list-item>
+</mat-list>

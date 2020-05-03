@@ -37,5 +37,7 @@ export class ApiService {
   	this.token_expires = new Date(token_decoded.exp * 1000);
   	this.username = token_decoded.username;
 
+  getMovie(movieId: string): Observable<any>{
+    return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
 }
