@@ -12,7 +12,7 @@ urlpatterns = [
 	url(r'^signup/', views.createUser),
 	#insert movie id into movie_list
 	url(r'^addMovieToList/', views.addMovieToList),
-	url(r'^addMovieToList/', views.addMovieToList),
+	url(r'^top10Movies/', views.top10Movies),
 	path(r'api-token-auth/', views.authentication),
     path(r'api-token-refresh/', refresh_jwt_token),
 	#path('index', views.index),

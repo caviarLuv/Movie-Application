@@ -13,7 +13,7 @@ from rest_framework import views
 from rest_framework.views import APIView
 from .db_conn import *
 from .serializers import MovieSerializer
-import os, bcrypt, jwt, datetime
+import os, bcrypt, jwt, datetime, pymongo, json
 
 class MovieView(APIView):
 	def get(self, request):
@@ -81,5 +81,13 @@ def addMovieToList(request):
 	if user != None:
 		conn.movieApp.users.update_one({"username": un}, {"$addToSet": {"movie_list": movieId}})
 	conn.close()
+	return Response({"succeed": "movie is added!"}, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def top10Movies(request):
+	conn = db_conn()
+	movies = conn.movieApp.movies
+	top10 = movies.find().sort("avg_rating", pymongo.DESCENDING).limit(10)
+	print(top10)
+	return Response(json.dumps(top10)
