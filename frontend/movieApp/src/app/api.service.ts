@@ -40,6 +40,12 @@ export class ApiService {
   		});
   }
 
+  userLogout() {
+  	this.token = null;
+  	this.username = null;
+  	this.token_expires = null;
+  }
+
    private updateData(token) {
   	this.token = token;
   	const token_parts = this.token.split(/\./);
@@ -47,5 +53,6 @@ export class ApiService {
   	this.token_expires = new Date(token_decoded.exp * 1000);
   	this.username = token_decoded.username;
 	}
+
 }
 

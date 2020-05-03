@@ -5,6 +5,12 @@
   </a>
   <span class="spacer"></span>
   <a button mat-button (click)="viewProfile()">My Movies</a>
-  <a mat-button routerLink="/login">login</a>
-  <a mat-button routerLink="/signup">Signup</a>
+  <div *ngIf="logged_in === null; else elseBlock">
+  	  <a  mat-button routerLink="/login">login</a>
+  	  <a mat-button routerLink="/signup">Signup</a>
+  </div>
+  <ng-template #elseBlock> 
+  	<a button mat-button (click)="logout()">logout</a>
+  </ng-template>
+
 </mat-toolbar>
