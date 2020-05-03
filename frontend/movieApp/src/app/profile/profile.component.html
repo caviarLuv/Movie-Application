@@ -1,6 +1,6 @@
 <mat-nav-list>
   <div mat-subheader>My Movies</div>
-  <mat-list-item *ngFor="let movie of movies">
+  <mat-list-item *ngFor="let movie of movies" (click)="viewMovie(movie.title)">
     <mat-icon mat-list-icon>movie</mat-icon>
     <div mat-line>{{movie.title}}</div>
     <div mat-line>{{movie.desc}}</div>
