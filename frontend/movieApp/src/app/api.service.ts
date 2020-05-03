@@ -27,7 +27,7 @@ export class ApiService {
 
   userLogin(userData) {
   	this.http.post(this.baseurl+ '/api-token-auth/', userData).subscribe(
-  		data => {this.updateData(data['token'])},
+  		data => {this.updateData(data['token']); console.log(this.username+" token: "+ this.token)},
   		error => {
   			console.log(error);
   		});

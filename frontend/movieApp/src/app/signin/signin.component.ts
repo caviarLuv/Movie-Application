@@ -19,6 +19,7 @@ export class SigninComponent implements OnInit {
 }
 
   onSubmit(userdata) {
+  	this.signinForm.reset();
   	this.api.userLogin(userdata);
   }
 
