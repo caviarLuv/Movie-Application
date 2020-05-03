@@ -38,18 +38,20 @@ def authentication(request):
 			'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=2)
 			}
 			token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-			return Response({"token": token})
+			response = Response({"token": token})
 		else:
-			return Response({"error": "fail to authenticate"}, status=status.HTTP_400_BAD_REQUEST)
+			response = Response({"error": "fail to authenticate"}, status=status.HTTP_400_BAD_REQUEST)
 	else:
-		return Response({"error": "username doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
+		response = Response({"error": "username doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
+	conn.close()
+	return response
 
 # return a boolean
 def verifyToken(token):
 	jwt.decode(token, settings.SECRET_KEY, algorithm='HS256')
 
 # Sign-up
-@api_view(['POST', 'GET'])
+@api_view(['POST'])
 def createUser(request):
 	un = request.data['username']
 	pw = request.data['pw']
@@ -62,6 +64,22 @@ def createUser(request):
 	"liked_genres": liked_genres
 	}
 	if (collection.insert_one(user).acknowledged):
-		return Response({"succeed": "true"})
+		conn.close()
+		response = Response({"succeed": "true"})
 	else:
-		return Response({"succeed": "false"})
+		response = Response({"succeed": "false"})
+	conn.close()
+	return response
+
+
+@api_view(['POST'])
+def addMovieToList(request):
+	un = request.data['username']
+	movieId = request.data['movieId']
+	conn = db_conn()
+	user = conn.movieApp.users.find_one({"username": un})
+	if user != None:
+		conn.movieApp.users.update_one({"username": un}, {"$addToSet": {"movie_list": movieId}})
+	conn.close()
+
+

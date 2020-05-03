@@ -10,6 +10,9 @@ router = routers.DefaultRouter()
 urlpatterns = [
 	url(r'^movies/$', views.MovieView.as_view()),
 	url(r'^signup/', views.createUser),
+	#insert movie id into movie_list
+	url(r'^addMovieToList/', views.addMovieToList),
+	url(r'^addMovieToList/', views.addMovieToList),
 	path(r'api-token-auth/', views.authentication),
     path(r'api-token-refresh/', refresh_jwt_token),
 	#path('index', views.index),
