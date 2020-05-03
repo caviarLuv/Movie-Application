@@ -33,4 +33,8 @@ export class ProfileComponent {
     private api: ApiService,
     private router: Router) {
   }
+
+  viewMovie(movieId: string) {
+    this.router.navigate(['/movie/' + movieId]);
+  }
 }
