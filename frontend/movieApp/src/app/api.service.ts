@@ -18,6 +18,9 @@ export class ApiService {
     return this.http.get(this.baseurl + '/movies', {headers: this.httpHeaders});
   }
 
+  getMovie(movieId: string): Observable<any>{
+    return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
+  }
   createUser(userData): Observable<any> {
   	return this.http.post(this.baseurl+'/signup/', userData);
   }
@@ -36,8 +39,6 @@ export class ApiService {
   	const token_decoded = JSON.parse(window.atob(token_parts[1]));
   	this.token_expires = new Date(token_decoded.exp * 1000);
   	this.username = token_decoded.username;
-
-  getMovie(movieId: string): Observable<any>{
-    return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
-  }
+	}
 }
+
