@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.urls import path, include
- 
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from movieApp import views
 from rest_framework import routers
  
@@ -9,6 +9,9 @@ router = routers.DefaultRouter()
 #router.register(r'movies', views.MovieView)
 urlpatterns = [
 	url(r'^movies/$', views.MovieView.as_view()),
+	url(r'^signup/', views.createUser),
+	path(r'api-token-auth/', views.UserTokenView.as_view()),
+    path(r'api-token-refresh/', refresh_jwt_token),
 	#path('index', views.index),
     url(r'^$', include(router.urls)),
 ]
