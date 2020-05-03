@@ -23,6 +23,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   movieExists = false;
   movieId;
 
+  intMovieId = 1234123;
+
   constructor(
     private api: ApiService,
     private router: ActivatedRoute,
@@ -56,7 +58,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     }
 
     addMovie() {
-      this.api.addMovie(this.movieId, localStorage.getItem('username'));
+      this.api.addMovie(this.intMovieId, localStorage.getItem('username'));
     }
 
     removeMovie() {

@@ -3,5 +3,7 @@
   <mat-list-item>Description: {{ movie.desc }}</mat-list-item>
   <mat-divider></mat-divider>
   <mat-list-item>Release Date: {{ movie.date }}</mat-list-item>
-  <button mat-button (click)="addMovie()">Add Movie</button>
+  <li *ngIf="userIsAuthenticated">
+    <button mat-button (click)="addMovie()">Add Movie</button>
+  </li>
 </mat-list>

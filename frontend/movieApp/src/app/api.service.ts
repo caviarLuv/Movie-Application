@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,16 @@ export class ApiService {
     return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
 
-  addMovie(movieId: string, username: string) {
-    const formData = new FormData();
-    formData.append('movieId', movieId);
-    formData.append('username', username);
-    console.log(username + ' ' + movieId);
+  addMovie(movieId: number, username: string) {
+    const data = {
+      'username': username,
+      'movieId': movieId
+    };
+    console.log(data);
     this.http
-            .put<{ message: string; movie: string; user: string}>(
-                this.baseurl + '/movie/' + movieId,
-                formData
+            .post<{ message: string; movie: string; user: string}>(
+                this.baseurl + '/addMovieToList/',
+                data
             )
             .subscribe(responseData => {
                 this.router.navigate(['/' + username]);
