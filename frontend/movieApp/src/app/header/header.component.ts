@@ -14,7 +14,7 @@ import { ApiService } from '../api.service';
 export class HeaderComponent implements OnInit, OnDestroy{
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
-  userId: string;
+  username: string;
   constructor(private router: Router, private api: ApiService, private authService: AuthService) {}
 
   ngOnInit() {
@@ -23,13 +23,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
         .getAuthStatusListener()
         .subscribe(isAuthenticated => {
             this.userIsAuthenticated = isAuthenticated;
-            this.userId = this.authService.getUserId();
+            this.username = this.authService.getUsername();
         });
   }
 
   viewProfile() {
-    console.log(localStorage);
-    this.router.navigate(['/profile/' + localStorage.getItem('userId')]);
+    console.log(this.authService.getUsername);
+    this.router.navigate(['/profile/' + localStorage.getItem('username')]);
   }
 
   onLogout() {
