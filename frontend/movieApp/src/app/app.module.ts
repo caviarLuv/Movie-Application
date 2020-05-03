@@ -26,7 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     HeaderComponent,
     MovieListComponent,
-    SignupComponent
+    SignupComponent,
     MovieComponent,
     ProfileComponent
   ],
@@ -39,10 +39,10 @@ import { AppRoutingModule } from './app-routing.module';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
     MatInputModule,
     MatCheckboxModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],
