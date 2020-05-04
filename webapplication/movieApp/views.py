@@ -95,12 +95,9 @@ def deleteMoviefromList(request):
 	if user != None and movieId != None:
 		db.users.update_one({'username':un},{'$pull':{'movie_list':movieId}})
 	else:
-		return Response({"Movie not found"})
+		return Response(dumps(toplist), status=status.HTTP_200_OK)
 	conn.close()
 	return Response({"Movie Deleted Successfully"})
-
-
-
 
 @api_view(['GET'])
 def top10Movies(request):
@@ -130,3 +127,17 @@ def getMoviesByGenre(request):
 	movies = collection.find({"genres": genre}, {"movieId": 1, "title": 1, "_id": 0})
 	conn.close()
 	return Response(dumps(list(movies)), status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def getMoviebyName(request):
+	name = request.data['title']
+	conn = db_conn()
+	db = conn.movieApp
+	moviename = list(db.movies.find({'title':name},{'title':1, 'genres':1}))
+	if moviename != None:
+		return Response(dumps(moviename), status = status.HTTP_200_OK)
+	else:
+		return Response({"Movie not Found"})
+
+
+
