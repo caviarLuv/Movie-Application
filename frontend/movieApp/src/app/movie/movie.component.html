@@ -1,7 +1,9 @@
 <mat-list>
   <mat-nav-list>
     <mat-list-item *ngFor="let movie of movie">
-        <span>Title: {{movie.title}}</span>
+      <div mat-line>Title: {{movie.title}}</div>
+      <div mat-line>Rating: {{movie.avg_rating}}</div>
+      <div mat-line>Genres: {{movie.genres}}</div>
     </mat-list-item>
   </mat-nav-list>
   <li *ngIf="userIsAuthenticated">
