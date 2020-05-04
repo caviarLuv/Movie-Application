@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^getMovieLinks/', views.getMovieLinks),
     url(r'^getMoviesByGenre/', views.getMoviesByGenre),
 	url(r'^getMovieById/', views.getMovieById),
-
+	url(r'^getMovieList/', views.getMovieList),
 ]
