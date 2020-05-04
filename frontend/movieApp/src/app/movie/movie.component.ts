@@ -15,27 +15,21 @@ export class MovieComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
   username: string;
-  movie = {
-    title: 'test',
-    desc: 'this is a test description',
-    date: '1999'
-  };
+  movie = [];
   movieId;
-
-  intMovieId = 1234123;
 
   constructor(
     private api: ApiService,
     private router: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
     ) {
-      // this.getMovie();
+      this.router.paramMap.subscribe(params => {
+        this.movieId = +params.get('movieId');
+      });
+      this.viewMovie(this.movieId);
     }
 
     ngOnInit() {
-      this.router.paramMap.subscribe(params => {
-        this.movieId = params.get('movieId');
-      });
       this.userIsAuthenticated = this.authService.getIsAuth();
       this.authListenerSubs = this.authService
         .getAuthStatusListener()
@@ -45,19 +39,17 @@ export class MovieComponent implements OnInit, OnDestroy {
         });
     }
 
-    getMovie = () => {
-      this.api.getMovie(this.movieId).subscribe(
-        data => {
-          this.movie = data;
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
+    viewMovie(movieId: number) {
+    this.api.getMovieById(movieId).subscribe(
+      data => {
+        this.movie = JSON.parse(data);
+        console.log(this.movie);
+      }
+    )
+  }
 
     addMovie() {
-      this.api.addMovie(this.intMovieId, localStorage.getItem('username'));
+      this.api.addMovie(this.movieId, localStorage.getItem('username'));
     }
 
     ngOnDestroy() {}
