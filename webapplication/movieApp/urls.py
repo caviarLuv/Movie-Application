@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^getMoviesByGenre/', views.getMoviesByGenre),
 	url(r'^getMovieById/', views.getMovieById),
 	url(r'^recommandByGenre_Liked/', views.recommandByUserInterest),
-  	url(r'^getMovieList/', views.getMovieList),
+  	url(r'^getMovieList/', views.getMovieList)
+	]
