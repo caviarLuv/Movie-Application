@@ -92,10 +92,13 @@ def deleteMoviefromList(request):
 	#delete the movie from userlist
 	db = conn.movieApp
 	user = db.users.find_one({"username":un})
-	if user != None:
-		db.users.update({'username':un},{'$pull':{'movie_list':movieId}})
+	if user != None and movieId != None:
+		db.users.update_one({'username':un},{'$pull':{'movie_list':movieId}})
+	else:
+		return Response({"Movie not found"})
 	conn.close()
 	return Response({"Movie Deleted Successfully"})
+
 
 
 

@@ -14,7 +14,7 @@ urlpatterns = [
 	url(r'^addMovieToList/', views.addMovieToList),
 	url(r'^top10Movies/', views.top10Movies),
 	#delete movie id from movie_list
-	url(r'^deleteMoviefromList/', views.addMovieToList),
+	url(r'^deleteMoviefromList/', views.deleteMoviefromList),
 	path(r'api-token-auth/', views.authentication),
     path(r'api-token-refresh/', refresh_jwt_token),
 	#path('index', views.index),
