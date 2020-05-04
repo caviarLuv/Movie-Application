@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
   username: string;
-  intMovieId = 4;
+  intMovieId = 1234123;
 
   movies = [
     {

@@ -18,6 +18,10 @@ export class ApiService {
     return this.http.get(this.baseurl + '/movies', {headers: this.httpHeaders});
   }
 
+  getTopTenMovies(): Observable<any>{
+    return this.http.get(this.baseurl + '/top10Movies/', {headers: this.httpHeaders});
+  }
+
   getMovie(movieId: string): Observable<any>{
     return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
