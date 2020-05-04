@@ -31,6 +31,11 @@ export class ApiService {
     return this.http.post(this.baseurl + '/getMovieById/', data, {headers: this.httpHeaders});
   }
 
+  getMovieList(username: string): Observable<any>{
+    const data = {'username': username};
+    return this.http.post(this.baseurl + '/getMovieList/', data, {headers: this.httpHeaders});
+  }
+
   addMovie(movieId: number, username: string) {
     const data = {
       'username': username,
