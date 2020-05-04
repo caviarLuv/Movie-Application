@@ -13,7 +13,8 @@ from rest_framework import views
 from rest_framework.views import APIView
 from .db_conn import *
 from .serializers import MovieSerializer
-import os, bcrypt, jwt, datetime, pymongo, json
+import os, bcrypt, jwt, datetime, pymongo
+from bson.json_util import dumps
 
 class MovieView(APIView):
 	def get(self, request):
@@ -102,6 +103,8 @@ def deleteMoviefromList(request):
 def top10Movies(request):
 	conn = db_conn()
 	movies = conn.movieApp.movies
-	top10 = movies.find().sort("avg_rating", pymongo.DESCENDING).limit(10)
-	print(top10)
-	return Response(json.dumps(top10)
+	top10 = movies.find({},{"_id": 0, "genres": 0}).sort("avg_rating", pymongo.DESCENDING).limit(10)
+	toplist = []
+	for doc in top10:
+		toplist.append(doc)
+	return Response({dumps(toplist)})
