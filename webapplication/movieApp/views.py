@@ -173,17 +173,18 @@ def getMovieById(request):
 
 @api_view(['POST'])
 def getMovieList(request):
+	usermovienamelist = []
 	un = request.data['username']
 	conn = db_conn()
-	userList = conn.movieApp.users.find_one({"username": un},{"movie_list": 1,'_id': 0})
+	userList = list(conn.movieApp.users.find({"username": un},{"movie_list": 1,'_id': 0}))
+	print(userList)
 	conn.close()
 	if userList != None:
-		return Response(dumps(userList), status=status.HTTP_200_OK)
+		for movieid in userList[0]['movie_list']:
+			usermovienamelist.append(conn.movieApp.movies.distinct("title",{'movieId':movieid}))
+		return Response(dumps(usermovienamelist), status=status.HTTP_200_OK)
 	else:
 		return Response({"User doesn't have list"})
-
-
-
 
 
 @api_view(['POST'])
