@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^$', include(router.urls)),
     url(r'^getMovieLinks/', views.getMovieLinks),
     url(r'^getMoviesByGenre/', views.getMoviesByGenre),
-	url(r'^getavgratingId/',views.averageRatingbymovieID)
-
+	url(r'^getavgratingId/',views.averageRatingbymovieID),
+	url(r'^getMovieById/', views.getMovieById),
+	url(r'^recommandByGenre_Liked/', views.recommandByUserInterest),
 ]
