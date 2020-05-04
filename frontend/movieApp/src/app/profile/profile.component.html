@@ -7,3 +7,6 @@
     <div mat-line>{{movie.date}}</div>
   </mat-list-item>
 </mat-nav-list>
+<li *ngIf="userIsAuthenticated">
+  <button mat-button (click)="removeMovie()">Remove Movie</button>
+</li>

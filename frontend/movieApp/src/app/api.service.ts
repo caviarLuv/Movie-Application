@@ -34,22 +34,23 @@ export class ApiService {
                 data
             )
             .subscribe(responseData => {
-                this.router.navigate(['/' + username]);
+                this.router.navigate(['/profile/' + username]);
             });
   }
 
-  removeMovie(movieId: string, username: string) {
-    const formData = new FormData();
-    formData.append('movieId', movieId);
-    formData.append('username', username);
-    console.log(username + ' ' + movieId);
+  removeMovie(movieId: number, username: string) {
+    const data = {
+      'username': username,
+      'movieId': movieId
+    };
+    console.log(data);
     this.http
-            .put<{ message: string; movie: string; user: string}>(
-                this.baseurl + '/movie/' + movieId,
-                formData
+            .post<{}>(
+                this.baseurl + '/deleteMoviefromList/',
+                data
             )
             .subscribe(responseData => {
-                this.router.navigate(['/' + username]);
+                this.router.navigate(['/']);
             });
   }
 }
