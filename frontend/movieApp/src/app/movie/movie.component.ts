@@ -20,7 +20,6 @@ export class MovieComponent implements OnInit, OnDestroy {
     desc: 'this is a test description',
     date: '1999'
   };
-  movieExists = false;
   movieId;
 
   intMovieId = 1234123;
@@ -59,10 +58,6 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     addMovie() {
       this.api.addMovie(this.intMovieId, localStorage.getItem('username'));
-    }
-
-    removeMovie() {
-      this.api.removeMovie(this.movieId, this.username);
     }
 
     ngOnDestroy() {}
