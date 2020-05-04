@@ -13,7 +13,7 @@ from rest_framework import views
 from rest_framework.views import APIView
 from .db_conn import *
 from .serializers import MovieSerializer
-import os, bcrypt, jwt, datetime, pymongo
+import os, bcrypt, jwt, datetime, pymongo, random
 from bson.json_util import dumps
 
 class MovieView(APIView):
@@ -164,4 +164,20 @@ def getMovieList(request):
 
 
 
+
+@api_view(['POST'])
+# pass in user id and return 10 random recommendations
+def recommandByUserInterest(request):
+	username = request.data['username']
+	conn = db_conn()
+	genres = conn.movieApp.users.find_one({"username": username})["liked_genres"]
+	choice = list(conn.movieApp.movies.find({"genres": {"$elemMatch": {"$in": genres}}}, {"_id": 0}))
+	size = conn.movieApp.movies.count_documents({"genres": {"$elemMatch": {"$in": genres}}})
+	suggestMovies = list()
+	for i in range(10):
+		randomIndex = random.randrange(size)
+		suggestMovies.append(choice[randomIndex])
+		choice.pop(randomIndex)
+		size -= 1
+	return Response(dumps(suggestMovies), status=status.HTTP_200_OK)
 
