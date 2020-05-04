@@ -107,4 +107,23 @@ def top10Movies(request):
 	toplist = []
 	for doc in top10:
 		toplist.append(doc)
-	return Response({dumps(toplist)})
+	conn.close()
+	return Response(dumps(toplist), status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def getMovieLinks(request):
+	movieId = request.data['movieId']
+	conn = db_conn()
+	links = conn.movieApp.links.find_one({"movieId": movieId}, {"_id": 0})
+	conn.close()
+	return Response(links, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def getMoviesByGenre(request):
+	genre = request.data['genre']
+	conn = db_conn()
+	collection = conn.movieApp.movies
+	movies = collection.find({"genres": genre}, {"movieId": 1, "title": 1, "_id": 0})
+	conn.close()
+	return Response(dumps(list(movies)), status=status.HTTP_200_OK)

@@ -19,4 +19,6 @@ urlpatterns = [
     path(r'api-token-refresh/', refresh_jwt_token),
 	#path('index', views.index),
     url(r'^$', include(router.urls)),
+    url(r'^getMovieLinks/', views.getMovieLinks),
+    url(r'^getMoviesByGenre/', views.getMoviesByGenre),
 ]
