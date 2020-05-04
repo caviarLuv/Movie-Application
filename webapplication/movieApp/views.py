@@ -138,6 +138,27 @@ def getMoviebyName(request):
 		return Response(dumps(moviename), status = status.HTTP_200_OK)
 	else:
 		return Response({"Movie not Found"})
+	conn.close()
+
+@api_view(['POST'])
+def averageRatingbymovieID(request):
+	movie_id = request.data['movieId']
+	conn = db_conn()
+	db = conn.movieApp
+	totalratings = 0
+	ratings = list(db.ratings.find({"movidId":1257}))
+	print(ratings)
+	#ratings = list(db.ratings.find({'movieId':movie_id},{'rating':1}))
+	return Response(dumps(ratings), status = status.HTTP_200_OK)
+
+	'''if ratings is None:
+		for rating in ratings:
+			totalratings += ratings[rating]['rating']
+	return Response(dumps(totalratings/len(ratings)))'''
+
+
+
+
 
 
 
