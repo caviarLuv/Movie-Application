@@ -26,6 +26,11 @@ export class ApiService {
     return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
 
+  getMovieById(movieId: number): Observable<any>{
+    const data = {'movieId': movieId};
+    return this.http.post(this.baseurl + '/getMovieById/', data, {headers: this.httpHeaders});
+  }
+
   addMovie(movieId: number, username: string) {
     const data = {
       'username': username,
@@ -57,5 +62,6 @@ export class ApiService {
                 this.router.navigate(['/']);
             });
   }
+
 }
 

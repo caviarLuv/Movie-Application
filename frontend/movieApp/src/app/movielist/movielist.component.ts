@@ -11,26 +11,12 @@ import { Router } from '@angular/router';
 })
 
 export class MovieListComponent {
-  movies = [{title: 'test'}];
   topTen = [];
 
   constructor(
     private api: ApiService,
     private router: Router) {
-    this.getMovies();
     this.getTopMovies();
-  }
-
-  getMovies = () => {
-    this.api.getAllMovies().subscribe(
-      data => {
-        this.movies = data;
-        // console.log(this.movies);
-      },
-      error => {
-        console.log(error);
-      }
-    );
   }
 
   getTopMovies = () => {
@@ -45,7 +31,16 @@ export class MovieListComponent {
     );
   }
 
-  viewMovie(movieId: string) {
+  navigateTo(movieId) {
     this.router.navigate(['/movie/' + movieId]);
+  }
+
+  viewMovie(movieId: number) {
+    this.api.getMovieById(movieId).subscribe(
+      data => {
+        let movie = JSON.parse(data);
+        console.log(movie);
+      }
+    )
   }
 }

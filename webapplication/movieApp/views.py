@@ -139,5 +139,14 @@ def getMoviebyName(request):
 	else:
 		return Response({"Movie not Found"})
 
+@api_view(['POST'])
+def getMovieById(request):
+	movieId = request.data['movieId']
+	conn = db_conn()
+	movie = conn.movieApp.movies
+	movieData = movie.find({'movieId' : movieId}, {"_id": 0, "genres": 0})
+	conn.close()
+	return Response(dumps(movieData), status=status.HTTP_200_OK)
+
 
 
