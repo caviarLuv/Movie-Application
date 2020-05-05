@@ -64,7 +64,7 @@ export class ApiService {
                 data
             )
             .subscribe(responseData => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/movie/' + movieId]);
             });
   }
 
