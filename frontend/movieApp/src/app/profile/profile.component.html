@@ -1,9 +1,9 @@
 <mat-nav-list>
   <div mat-subheader>My Movies</div>
-  <mat-list-item *ngFor="let movie of movies">
+  <mat-list-item *ngFor="let movie of movieList" (click)="navigateTo(movie[0].movieId)">
     <mat-icon mat-list-icon>movie</mat-icon>
-    <div mat-line>Title: {{movie.title}}</div>
-    <div mat-line>Genre: {{movie.genres}}</div>
-    <div mat-line>User Rating: {{movie.avg_rating}}</div>
+    <div mat-line>Title: {{movie[0].title}}</div>
+    <div mat-line>Genre: {{movie[0].genres}}</div>
+    <div mat-line>User Rating: {{movie[0].avg_rating}}</div>
   </mat-list-item>
 </mat-nav-list>

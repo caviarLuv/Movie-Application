@@ -16,11 +16,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   username: string;
   movieList = [];
-  movies = [];
 
   constructor(
     private api: ApiService,
     private router: ActivatedRoute,
+    private router2: Router,
     private authService: AuthService) {
       this.router.paramMap.subscribe(params => {
         this.username = params.get('userId');
@@ -37,25 +37,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
   }
 
-  getMovieList(username) {
+  getMovieList(username: string) {
     this.api.getMovieList(username).subscribe(
       data => {
         this.movieList = JSON.parse(data);
         console.log(this.movieList);
-        for (const x of this.movieList.movie_list) {
-          this.viewMovie(x);
-        }
-        console.log(this.movies);
+      },
+      error => {
+        console.log(error);
       }
     );
   }
 
-  viewMovie(movieId: number) {
-    this.api.getMovieById(movieId).subscribe(
-      data => {
-        this.movies.push(JSON.parse(data));
-      }
-    );
+  navigateTo(movieId) {
+    this.router2.navigate(['/movie/' + movieId]);
   }
 
   ngOnDestroy() {}
