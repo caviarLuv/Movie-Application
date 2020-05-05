@@ -23,7 +23,6 @@ export class MovieListComponent {
     this.api.getTopTenMovies().subscribe(
       data => {
         this.topTen = JSON.parse(data);
-        console.log(this.topTen);
       },
       error => {
         console.log(error);

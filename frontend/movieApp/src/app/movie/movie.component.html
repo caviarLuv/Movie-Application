@@ -7,3 +7,10 @@
       <button *ngIf="userIsAuthenticated" mat-button (click)="addMovie()">Add Movie</button>
     </mat-list-item>
 </mat-list>
+<mat-nav-list>
+  <div mat-subheader>Similar Movies</div>
+  <mat-list-item *ngFor="let movie of similarMovies" (click)="navigateTo(movie.movieId)">
+      <mat-icon mat-list-icon>movie</mat-icon>
+      <span>{{movie.title}}</span>
+  </mat-list-item>
+</mat-nav-list>
