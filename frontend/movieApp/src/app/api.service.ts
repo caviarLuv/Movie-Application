@@ -41,6 +41,11 @@ export class ApiService {
     return this.http.post(this.baseurl + '/getSimilarMovies/', data, {headers: this.httpHeaders});
   }
 
+  searchForMovie(movieTitle: string): Observable<any> {
+    const data = { 'title': movieTitle };
+    return this.http.post(this.baseurl + '/getmoviebyname/', data, {headers: this.httpHeaders});
+  }
+
   addMovie(movieId: number, username: string) {
     const data = {
       'username': username,

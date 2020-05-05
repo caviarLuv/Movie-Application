@@ -13,3 +13,8 @@ a {
 .spacer {
   flex: 1 1 auto;
 }
+
+form {
+  font-size: smaller;
+}
+

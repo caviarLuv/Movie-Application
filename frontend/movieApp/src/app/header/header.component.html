@@ -3,6 +3,17 @@
     <mat-icon mat-list-icon>local_movies</mat-icon>
     FlixList
   </a>
+  <form (submit)="onSearch(searchForm)" #searchForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        name="searchTitle"
+        ngModel
+        type="text"
+        placeholder="Search for Movie"
+      />
+    </mat-form-field>
+  </form>
   <span class="spacer"></span>
   <ul>
     <li *ngIf="!userIsAuthenticated">

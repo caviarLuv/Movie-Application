@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   onLogout() {
     this.authService.logout();
+  }
+
+  onSearch(form: NgForm) {
+    if (form.invalid) {
+        return;
+    }
+    this.router.navigate(['/search/' + form.value.searchTitle]);
   }
 
   ngOnDestroy() {}

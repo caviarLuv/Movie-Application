@@ -16,10 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MovieListComponent } from './movielist/movielist.component';
-// import { SignupComponent } from './signup/signup.component'
 import { MovieComponent } from './movie/movie.component';
 import { ProfileComponent } from './profile/profile.component';
-// import { SigninComponent } from './signin/signin.component';
+import { MovieSearchComponent } from './moviesearch/moviesearch.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './auth/login/login.component';
@@ -38,7 +37,8 @@ import { AppRoutingModule } from './app-routing.module';
     ProfileComponent,
     // SigninComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    MovieSearchComponent,
   ],
   imports: [
     BrowserModule,
