@@ -53,5 +53,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.router2.navigate(['/movie/' + movieId]);
   }
 
+  removeMovie(movieId: number) {
+    this.api.removeMovie(movieId, localStorage.username);
+  }
+
   ngOnDestroy() {}
 }
