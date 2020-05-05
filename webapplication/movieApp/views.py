@@ -222,3 +222,17 @@ def getLikedGenres(request):
 	conn.close()
 	return Response(liked_genres, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def addMovieComment(request):
+	movieId = request.data['movieId']
+	document = request.data['comment']
+	conn = db_conn()
+	result = conn.movieApp.movies.update_one({"movieId": movieId}, {"$addToSet": {"comments": document}})
+	conn.close()
+	if result.modified_count:
+		return Response({"Comment inserted"}, status=status.HTTP_200_OK)
+	else:
+		return Response({"Error, Comment not added"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
