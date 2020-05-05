@@ -140,24 +140,15 @@ def getMoviebyName(request):
 	conn.close()
 
 @api_view(['POST'])
+#Pass the movie ID
 def averageRatingbymovieID(request):
 	movie_id = request.data['movieId']
 	conn = db_conn()
 	db = conn.movieApp
-	totalratings = 0
-	ratings = list(db.ratings.find({"movidId":1257}))
-	print(ratings)
-	#ratings = list(db.ratings.find({'movieId':movie_id},{'rating':1}))
-	return Response(dumps(ratings), status = status.HTTP_200_OK)
-
-	'''if ratings is None:
-		for rating in ratings:
-			totalratings += ratings[rating]['rating']
-	return Response(dumps(totalratings/len(ratings)))'''
-
-
-
-
+	ratings = list(db.ratings.aggregate([{"$group":{"_id":movie_id, "Rating":{"$avg":"$rating"}}}]))
+	conn.close()
+	if ratings is not None:
+		return Response(dumps(ratings), status = status.HTTP_200_OK)
 
 @api_view(['POST'])
 def getMovieById(request):
@@ -180,14 +171,11 @@ def getMovieList(request):
 	conn.close()
 	if userList != None:
 		for movieid in userList[0]['movie_list']:
-			usermovienamelist.append(conn.movieApp.movies.distinct("title","genres",{'movieId':movieid}))
-		conn.close()
 			movieData = conn.movieApp.movies.find({'movieId': movieid},{"_id": 0})
 			usermovienamelist.append(movieData)
 		return Response(dumps(usermovienamelist), status=status.HTTP_200_OK)
 	else:
 		return Response({"User doesn't have list"})
-
 
 @api_view(['POST'])
 # pass in user id and return 10 random recommendations
