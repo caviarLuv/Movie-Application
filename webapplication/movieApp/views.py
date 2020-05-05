@@ -181,7 +181,8 @@ def getMovieList(request):
 	conn.close()
 	if userList != None:
 		for movieid in userList[0]['movie_list']:
-			usermovienamelist.append(conn.movieApp.movies.distinct("title",{'movieId':movieid}))
+			usermovienamelist.append(conn.movieApp.movies.distinct("title","genres",{'movieId':movieid}))
+		conn.close()
 		return Response(dumps(usermovienamelist), status=status.HTTP_200_OK)
 	else:
 		return Response({"User doesn't have list"})
