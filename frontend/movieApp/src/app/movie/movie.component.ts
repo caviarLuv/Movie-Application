@@ -18,6 +18,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   movie = [];
   similarMovies = [];
   movieId;
+  movieLink: string;
+  imdbLink: string;
 
   constructor(
     private api: ApiService,
@@ -42,13 +44,31 @@ export class MovieComponent implements OnInit, OnDestroy {
     }
 
     viewMovie(movieId: number) {
-    this.api.getMovieById(movieId).subscribe(
-      data => {
-        this.movie = JSON.parse(data);
-        this.getSimilarMovies();
-      }
-    )
-  }
+      this.api.getMovieById(movieId).subscribe(
+        data => {
+          this.movie = JSON.parse(data);
+          this.getSimilarMovies();
+          this.getMovieLink();
+        }
+      );
+    }
+
+    getMovieLink() {
+      this.api.getMovieLink(this.movieId).subscribe(
+        data => {
+          this.movieLink = data.imdbId.toString();
+          console.log(this.movieLink.length);
+          while (this.movieLink.length < 7) {
+            this.movieLink = '0' + this.movieLink;
+          }
+          this.imdbLink = 'https://www.imdb.com/title/tt' + this.movieLink;
+        }
+      );
+    }
+
+    imdbURL() {
+      window.location.href = this.imdbLink;
+    }
 
     addMovie() {
       this.api.addMovie(this.movieId, localStorage.getItem('username'));
