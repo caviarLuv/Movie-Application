@@ -123,7 +123,8 @@ def getMoviesByGenre(request):
 	genre = request.data['genre']
 	conn = db_conn()
 	collection = conn.movieApp.movies
-	movies = collection.find({"genres": genre}, {"movieId": 1, "title": 1, "_id": 0})
+	movies = collection.find({"genres": genre}, {"movieId": 1, "title": 1, "_id": 0})\
+		.sort("avg_rating", pymongo.DESCENDING).limit(10)
 	conn.close()
 	return Response(dumps(list(movies)), status=status.HTTP_200_OK)
 

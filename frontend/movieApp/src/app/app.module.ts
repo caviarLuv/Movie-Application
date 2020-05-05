@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +21,8 @@ import { MovieComponent } from './movie/movie.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MovieSearchComponent } from './moviesearch/moviesearch.component';
 import { MovieRecsComponent } from './movierecs/movierecs.component';
+import { GenreListComponent } from './genrelist/genre-list.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './auth/login/login.component';
@@ -39,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     SignupComponent,
     MovieSearchComponent,
     MovieRecsComponent,
+    GenreListComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { MovieSearchComponent } from './moviesearch/moviesearch.component';
 import { MovieRecsComponent } from './movierecs/movierecs.component';
+import { GenreListComponent } from './genrelist/genre-list.component';
 
 import { AuthGuard } from './auth/auth-guard';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'search/:movieTitle', component: MovieSearchComponent},
   { path: 'movierec/:username', component: MovieRecsComponent },
+  { path: 'topbygenre/:genre', component: GenreListComponent },
 ];
 
 @NgModule({

@@ -12,6 +12,25 @@ import { Router } from '@angular/router';
 
 export class MovieListComponent {
   topTen = [];
+  genres = [
+    'Action',
+    'Adventure',
+    'Animation',
+    'Comedy',
+    'Crime',
+    'Documentary',
+    'Drama',
+    'Fantasy',
+    'Film-Noir',
+    'Horror',
+    'Musical',
+    'Mystery',
+    'Romance',
+    'Sci-Fi',
+    'Thriller',
+    'War',
+    'Western'
+  ];
 
   constructor(
     private api: ApiService,
@@ -32,6 +51,10 @@ export class MovieListComponent {
 
   navigateTo(movieId) {
     this.router.navigate(['/movie/' + movieId]);
+  }
+
+  navigateToGenre(genre: string) {
+    this.router.navigate(['/topbygenre/' + genre]);
   }
 
   viewMovie(movieId: number) {
