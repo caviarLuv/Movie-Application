@@ -19,6 +19,7 @@ import { MovieListComponent } from './movielist/movielist.component';
 import { MovieComponent } from './movie/movie.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MovieSearchComponent } from './moviesearch/moviesearch.component';
+import { MovieRecsComponent } from './movierecs/movierecs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './auth/login/login.component';
@@ -32,13 +33,12 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     HeaderComponent,
     MovieListComponent,
-    // SignupComponent,
     MovieComponent,
     ProfileComponent,
-    // SigninComponent,
     LoginComponent,
     SignupComponent,
     MovieSearchComponent,
+    MovieRecsComponent,
   ],
   imports: [
     BrowserModule,

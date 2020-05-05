@@ -5,18 +5,17 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-search-movie',
-  templateUrl: './moviesearch.component.html',
+  selector: 'app-movie-movierecs',
+  templateUrl: './movierecs.component.html',
   providers: [ApiService],
-  styleUrls: ['./moviesearch.component.css']
+  styleUrls: ['./movierecs.component.css']
 })
 
-export class MovieSearchComponent implements OnInit, OnDestroy {
+export class MovieRecsComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
   username: string;
   movies = [];
-  movieTitle;
 
   constructor(
     private api: ApiService,
@@ -35,13 +34,13 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
             this.username = this.authService.getUsername();
         });
       this.router.paramMap.subscribe(params => {
-        this.movieTitle = params.get('movieTitle');
-        this.viewList(this.movieTitle);
+        this.username = params.get('username');
+        this.getRecs(this.username);
       });
     }
 
-    viewList(movieTitle: string) {
-    this.api.searchForMovie(movieTitle).subscribe(
+    getRecs(username: string) {
+    this.api.getMovieRecs(username).subscribe(
       data => {
         this.movies = JSON.parse(data);
       }
@@ -49,10 +48,7 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   }
 
     navigateTo(movieId) {
-      // Weird hack to reload page
-      this.router2.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router2.navigate(['/movie/' + movieId]);
-      });
+      this.router2.navigate(['/movie/' + movieId]);
     }
 
     ngOnDestroy() {}
