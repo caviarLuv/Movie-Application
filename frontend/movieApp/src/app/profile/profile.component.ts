@@ -49,6 +49,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     );
   }
 
+  movieRec() {
+    this.router2.navigate(['/movierec/' + this.username]);
+  }
+
   navigateTo(movieId) {
     this.router2.navigate(['/movie/' + movieId]);
   }
