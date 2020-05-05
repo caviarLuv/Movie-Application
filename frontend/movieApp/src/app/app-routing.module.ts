@@ -6,10 +6,11 @@ import { MovieComponent } from './movie/movie.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { MovieSearchComponent } from './moviesearch/moviesearch.component'
+import { MovieSearchComponent } from './moviesearch/moviesearch.component';
+import { MovieRecsComponent } from './movierecs/movierecs.component';
+
 import { AuthGuard } from './auth/auth-guard';
-// import { SignupComponent } from './signup/signup.component';
-// import { SigninComponent } from './signin/signin.component';
+
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'search/:movieTitle', component: MovieSearchComponent},
+  { path: 'movierec/:username', component: MovieRecsComponent },
 ];
 
 @NgModule({
