@@ -1,9 +1,11 @@
-<mat-nav-list>
+<mat-list>
   <div mat-subheader>My Movies</div>
-  <mat-list-item *ngFor="let movie of movies">
+  <mat-list-item *ngFor="let movie of movieList">
     <mat-icon mat-list-icon>movie</mat-icon>
-    <div mat-line>Title: {{movie.title}}</div>
-    <div mat-line>Genre: {{movie.genres}}</div>
-    <div mat-line>User Rating: {{movie.avg_rating}}</div>
+    <div mat-line>Title: {{movie[0].title}}</div>
+    <div mat-line>Genre: {{movie[0].genres}}</div>
+    <div mat-line>User Rating: {{movie[0].avg_rating}}</div>
+    <button *ngIf="userIsAuthenticated" mat-button (click)="removeMovie(movie[0].movieId)">Remove</button>
+    <button mat-button (click)="navigateTo(movie[0].movieId)">View Movie</button>
   </mat-list-item>
-</mat-nav-list>
+</mat-list>

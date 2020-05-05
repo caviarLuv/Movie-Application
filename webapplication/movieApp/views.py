@@ -176,13 +176,14 @@ def getMovieList(request):
 	usermovienamelist = []
 	un = request.data['username']
 	conn = db_conn()
-	userList = list(conn.movieApp.users.find({"username": un},{"movie_list": 1,'_id': 0}))
-	print(userList)
+	userList = conn.movieApp.users.find({"username": un},{"movie_list": 1,'_id': 0})
 	conn.close()
 	if userList != None:
 		for movieid in userList[0]['movie_list']:
 			usermovienamelist.append(conn.movieApp.movies.distinct("title","genres",{'movieId':movieid}))
 		conn.close()
+			movieData = conn.movieApp.movies.find({'movieId': movieid},{"_id": 0})
+			usermovienamelist.append(movieData)
 		return Response(dumps(usermovienamelist), status=status.HTTP_200_OK)
 	else:
 		return Response({"User doesn't have list"})
@@ -202,5 +203,34 @@ def recommandByUserInterest(request):
 		suggestMovies.append(choice[randomIndex])
 		choice.pop(randomIndex)
 		size -= 1
+	conn.close()
 	return Response(dumps(suggestMovies), status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+# pass in movieId
+def getSimilarMovies(request):
+	movieId = request.data['movieId']
+	conn = db_conn()
+	movieGenre = conn.movieApp.movies.find_one({"movieId": movieId}, {"_id": 0, "genres": 1})['genres']
+	similarMovieCandidate = list(conn.movieApp.movies.find({"movieId": {"$ne": movieId},  "genres": {"$elemMatch": {"$in": movieGenre}}}, {"_id": 0}))
+	size = conn.movieApp.movies.count_documents({"movieId": {"$ne": movieId},  "genres": {"$elemMatch": {"$in": movieGenre}}})
+	suggestMovies = list()
+	for i in range(10):
+		randomIndex = random.randrange(size)
+		suggestMovies.append(similarMovieCandidate[randomIndex])
+		similarMovieCandidate.pop(randomIndex)
+		size -= 1
+	conn.close()
+	return Response(dumps(suggestMovies), status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def getLikedGenres(request):
+	un = request.data['username']
+	conn = db_conn()
+	liked_genres = conn.movieApp.users.find_one({"username": un}, {"_id": 0,"liked_genres": 1})
+	print(liked_genres)
+	conn.close()
+	return Response(liked_genres, status=status.HTTP_200_OK)
 
