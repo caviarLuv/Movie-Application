@@ -72,7 +72,6 @@ def createUser(request):
 	conn.close()
 	return response
 
-
 @api_view(['POST'])
 def addMovieToList(request):
 	un = request.data['username']
@@ -138,6 +137,27 @@ def getMoviebyName(request):
 		return Response(dumps(moviename), status = status.HTTP_200_OK)
 	else:
 		return Response({"Movie not Found"})
+	conn.close()
+
+@api_view(['POST'])
+def averageRatingbymovieID(request):
+	movie_id = request.data['movieId']
+	conn = db_conn()
+	db = conn.movieApp
+	totalratings = 0
+	ratings = list(db.ratings.find({"movidId":1257}))
+	print(ratings)
+	#ratings = list(db.ratings.find({'movieId':movie_id},{'rating':1}))
+	return Response(dumps(ratings), status = status.HTTP_200_OK)
+
+	'''if ratings is None:
+		for rating in ratings:
+			totalratings += ratings[rating]['rating']
+	return Response(dumps(totalratings/len(ratings)))'''
+
+
+
+
 
 @api_view(['POST'])
 def getMovieById(request):
@@ -146,8 +166,25 @@ def getMovieById(request):
 	movie = conn.movieApp.movies
 	movieData = movie.find({'movieId' : movieId}, {"_id": 0})
 	conn.close()
-	return Response(dumps(movieData), status=status.HTTP_200_OK)
+	if movieData != None:
+		return Response(dumps(movieData), status=status.HTTP_200_OK)
+	else:
+		return Response({"Movie not Found"})
 
+@api_view(['POST'])
+def getMovieList(request):
+	usermovienamelist = []
+	un = request.data['username']
+	conn = db_conn()
+	userList = list(conn.movieApp.users.find({"username": un},{"movie_list": 1,'_id': 0}))
+	print(userList)
+	conn.close()
+	if userList != None:
+		for movieid in userList[0]['movie_list']:
+			usermovienamelist.append(conn.movieApp.movies.distinct("title",{'movieId':movieid}))
+		return Response(dumps(usermovienamelist), status=status.HTTP_200_OK)
+	else:
+		return Response({"User doesn't have list"})
 
 
 @api_view(['POST'])
