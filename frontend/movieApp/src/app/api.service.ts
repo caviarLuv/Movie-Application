@@ -48,6 +48,11 @@ export class ApiService {
     return this.http.post(this.baseurl + '/recommendByGenre_Liked/', data, {headers: this.httpHeaders});
   }
 
+  getGenreTop(genre: string): Observable<any>{
+    const data = { 'genre': genre };
+    return this.http.post(this.baseurl + '/getMoviesByGenre/', data, {headers: this.httpHeaders});
+  }
+
   addMovie(movieId: number, username: string) {
     const data = {
       'username': username,
