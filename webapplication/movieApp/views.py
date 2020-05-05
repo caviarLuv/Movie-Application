@@ -132,7 +132,7 @@ def getMoviebyName(request):
 	name = request.data['title']
 	conn = db_conn()
 	db = conn.movieApp
-	moviename = list(db.movies.find({'title':name},{'title':1, 'genres':1}))
+	moviename = list(db.movies.find({'title':{"$regex":name, "$options" : 'i'}},{"_id": 0}).limit(10))
 	if moviename != None:
 		return Response(dumps(moviename), status = status.HTTP_200_OK)
 	else:
