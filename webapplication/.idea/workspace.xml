@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bf9b23c-f4f5-4b58-af5e-c195616a0a22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/movieApp/src/app/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/movieApp/src/app/profile/profile.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/movieApp/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
