@@ -20,6 +20,9 @@
 </mat-accordion>
 <br>
 <form *ngIf="userIsAuthenticated" (submit)="addComment(commentForm)" #commentForm="ngForm">
+  Rating:
+  <mat-slider name="rating" ngModel min="0" max="5" step="0.5" thumbLabel tickInterval="0.5"></mat-slider>
+  <br>
   <mat-form-field>
     <textarea
       matInput
