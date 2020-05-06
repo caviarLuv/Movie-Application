@@ -142,10 +142,12 @@ def getMoviebyName(request):
 @api_view(['POST'])
 #Pass the movie ID
 def averageRatingbymovieID(request):
-	movie_id = request.data['movieId']
+	movie_id = int(request.data['movieId'])
 	conn = db_conn()
 	db = conn.movieApp
-	ratings = list(db.ratings.aggregate([{"$group":{"_id":movie_id, "Rating":{"$avg":"$rating"}}}]))
+	ratings = list(db.ratings.aggregate([{"$group": {"_id": movie_id, "Rating": {"$avg": "$rating"}}}]))
+	individual_rating = ratings[0]['Rating']
+	db.movies.update_one({"movieId":movie_id},{"$set":{"avg_rating":individual_rating}})
 	conn.close()
 	if ratings is not None:
 		return Response(dumps(ratings), status = status.HTTP_200_OK)
