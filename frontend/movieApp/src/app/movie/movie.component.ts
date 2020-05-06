@@ -82,14 +82,19 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.api.addComment(this.movieId, localStorage.getItem('username'), form.value.comment).subscribe(
         data => {
           console.log(data);
-          this.router2.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router2.navigate(['/movie/' + this.movieId]);
-          });
         },
         error => {
           console.log(error);
         }
       );
+      this.api.addRating(this.movieId, localStorage.getItem('username'), form.value.rating).subscribe(
+        data => {
+           console.log(data)
+           this.router2.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+           this.router2.navigate(['/movie/' + this.movieId]);
+          });
+        },
+        error=>{console.log(error)});
     }
 
     getSimilarMovies() {

@@ -61,6 +61,16 @@ export class ApiService {
     return this.http.post(this.baseurl + '/addMovieComment/', data, {headers: this.httpHeaders});
   }
 
+  addRating(movieId: number, username: string, rating: number): Observable<any>{
+    const data = {
+      'movieId': movieId,
+      'username': username,
+      'rating': rating,
+      'timestamp': Date.now()
+    }
+    return this.http.post(this.baseurl + '/addMovieRating/', data, {headers: this.httpHeaders});
+  }
+
   addMovie(movieId: number, username: string) {
     const data = {
       'username': username,

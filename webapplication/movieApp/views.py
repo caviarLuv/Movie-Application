@@ -246,7 +246,13 @@ def addMovieRating(request):
 	conn = db_conn()
 	result = conn.movieApp.ratings.insert_one({"userId": username, "movieId": movieId, "rating": rating, "timestamp": timestamp})
 	if result.acknowledged:
+		db = conn.movieApp
+		ratings = list(db.ratings.aggregate([{"$group": {"_id": movieId, "Rating": {"$avg": "$rating"}}}]))
+		individual_rating = ratings[0]['Rating']
+		db.movies.update_one({"movieId":movieId},{"$set":{"avg_rating":individual_rating}})
+		conn.close()
 		return Response({"rating inserted"}, status=status.HTTP_200_OK)
 	else:
+		conn.close()
 		return Response({"rating insertion fail"}, status=status.HTTP_400_BAD_REQUEST)
 
