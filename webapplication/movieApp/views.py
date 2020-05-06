@@ -166,6 +166,18 @@ def getMovieById(request):
 		return Response({"Movie not Found"})
 
 @api_view(['POST'])
+def getUserById(request):
+	un = request.data['username']
+	conn = db_conn()
+	user = conn.movieApp.users
+	userData = user.find({'username': un}, {"_id":0, "pw":0})
+	conn.close()
+	if userData != None:
+		return Response(dumps(userData), status=status.HTTP_200_OK)
+	else:
+		return Response({"User not Found"})
+
+@api_view(['POST'])
 def getMovieList(request):
 	usermovienamelist = []
 	un = request.data['username']
@@ -255,4 +267,6 @@ def addMovieRating(request):
 	else:
 		conn.close()
 		return Response({"rating insertion fail"}, status=status.HTTP_400_BAD_REQUEST)
+
+
 

@@ -33,5 +33,8 @@
     <li *ngIf="userIsAuthenticated">
         <button mat-button (click)="viewProfile()">My Movies</button>
     </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="viewProfilePage()">Profile</button>
+  </li>
   </ul>
 </mat-toolbar>

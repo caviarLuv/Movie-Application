@@ -9,6 +9,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { MovieSearchComponent } from './moviesearch/moviesearch.component';
 import { MovieRecsComponent } from './movierecs/movierecs.component';
 import { GenreListComponent } from './genrelist/genre-list.component';
+import { ProfilePageComponent } from './profilepage/profile-page.component'
 
 import { AuthGuard } from './auth/auth-guard';
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'search/:movieTitle', component: MovieSearchComponent},
   { path: 'movierec/:username', component: MovieRecsComponent },
   { path: 'topbygenre/:genre', component: GenreListComponent },
+  { path: 'profilepage/:username', component: ProfilePageComponent},
 ];
 
 @NgModule({

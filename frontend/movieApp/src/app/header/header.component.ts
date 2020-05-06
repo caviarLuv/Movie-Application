@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.router.navigate(['/profile/' + localStorage.getItem('username')]);
   }
 
+  viewProfilePage() {
+    this.router.navigate(['/profilepage/' + localStorage.getItem('username')])
+  }
+
   onLogout() {
     this.authService.logout();
   }

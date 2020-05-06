@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +20,11 @@ export class ApiService {
   getMovieById(movieId: number): Observable<any>{
     const data = {'movieId': movieId};
     return this.http.post(this.baseurl + '/getMovieById/', data, {headers: this.httpHeaders});
+  }
+
+  getUserById(username: string): Observable<any>{
+    const data = {'username': username};
+    return this.http.post(this.baseurl + '/getUserById/', data, {headers: this.httpHeaders});
   }
 
   getMovieLink(movieId: number): Observable<any>{

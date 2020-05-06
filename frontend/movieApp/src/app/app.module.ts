@@ -24,6 +24,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MovieSearchComponent } from './moviesearch/moviesearch.component';
 import { MovieRecsComponent } from './movierecs/movierecs.component';
 import { GenreListComponent } from './genrelist/genre-list.component';
+import { ProfilePageComponent } from './profilepage/profile-page.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -45,6 +46,8 @@ import { AppRoutingModule } from './app-routing.module';
     MovieSearchComponent,
     MovieRecsComponent,
     GenreListComponent,
+    ProfileComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatExpansionModule,
-    MatSliderModule 
+    MatSliderModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
