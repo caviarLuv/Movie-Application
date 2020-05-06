@@ -49,7 +49,7 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.api.getMovieById(movieId).subscribe(
         data => {
           this.movie = JSON.parse(data);
-          console.log(this.movie);
+          // console.log(this.movie);
           if (this.movie[0].comments !== undefined) {this.hasComments = true; }
           this.getSimilarMovies();
           this.getMovieLink();
@@ -61,7 +61,7 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.api.getMovieLink(this.movieId).subscribe(
         data => {
           this.movieLink = data.imdbId.toString();
-          console.log(this.movieLink.length);
+          // console.log(this.movieLink.length);
           while (this.movieLink.length < 7) {
             this.movieLink = '0' + this.movieLink;
           }
@@ -79,7 +79,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     }
 
     addComment(form: NgForm) {
-      this.api.addComment(this.movieId, localStorage.getItem('username'), form.value.comment).subscribe(
+      this.api.addRating(this.movieId, localStorage.getItem('username'), form.value.rating).subscribe (
         data => {
           console.log(data);
         },
@@ -87,14 +87,17 @@ export class MovieComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       );
-      this.api.addRating(this.movieId, localStorage.getItem('username'), form.value.rating).subscribe(
+      this.api.addComment(this.movieId, localStorage.getItem('username'), form.value.comment).subscribe(
         data => {
-           console.log(data)
-           this.router2.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-           this.router2.navigate(['/movie/' + this.movieId]);
+          // this.addRating(form);
+          this.router2.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router2.navigate(['/movie/' + this.movieId]);
           });
         },
-        error=>{console.log(error)});
+        error => {
+          console.log(error);
+        }
+      );
     }
 
     getSimilarMovies() {
@@ -117,4 +120,3 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {}
 }
-
