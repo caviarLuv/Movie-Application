@@ -4,6 +4,7 @@
       <div mat-line>Title: {{movie.title}}</div>
       <div mat-line>Rating: {{movie.avg_rating}}</div>
       <div mat-line>Genres: {{movie.genres}}</div>
+      <a mat-button (click)="imdbURL()">IMDB Link</a>
       <button *ngIf="userIsAuthenticated" mat-button (click)="addMovie()">Add Movie</button>
     </mat-list-item>
 </mat-list>

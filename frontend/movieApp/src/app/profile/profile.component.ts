@@ -41,7 +41,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.api.getMovieList(username).subscribe(
       data => {
         this.movieList = JSON.parse(data);
-        console.log(this.movieList);
       },
       error => {
         console.log(error);

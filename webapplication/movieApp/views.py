@@ -123,7 +123,8 @@ def getMoviesByGenre(request):
 	genre = request.data['genre']
 	conn = db_conn()
 	collection = conn.movieApp.movies
-	movies = collection.find({"genres": genre}, {"movieId": 1, "title": 1, "_id": 0})
+	movies = collection.find({"genres": genre}, {"movieId": 1, "title": 1, "_id": 0})\
+		.sort("avg_rating", pymongo.DESCENDING).limit(10)
 	conn.close()
 	return Response(dumps(list(movies)), status=status.HTTP_200_OK)
 
@@ -236,5 +237,16 @@ def addMovieComment(request):
 	else:
 		return Response({"Error, Comment not added"}, status=status.HTTP_400_BAD_REQUEST)
 
-
+@api_view(['POST'])
+def addMovieRating(request):
+	movieId = request.data['movieId']
+	username = request.data['username']
+	rating = request.data['rating']
+	timestamp = request.data['timestamp']
+	conn = db_conn()
+	result = conn.movieApp.ratings.insert_one({"userId": username, "movieId": movieId, "rating": rating, "timestamp": timestamp})
+	if result.acknowledged:
+		return Response({"rating inserted"}, status=status.HTTP_200_OK)
+	else:
+		return Response({"rating insertion fail"}, status=status.HTTP_400_BAD_REQUEST)
 

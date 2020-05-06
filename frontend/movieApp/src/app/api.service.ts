@@ -14,21 +14,18 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getAllMovies(): Observable<any>{
-    return this.http.get(this.baseurl + '/movies', {headers: this.httpHeaders});
-  }
-
   getTopTenMovies(): Observable<any>{
     return this.http.get(this.baseurl + '/top10Movies/', {headers: this.httpHeaders});
-  }
-
-  getMovie(movieId: string): Observable<any>{
-    return this.http.get(this.baseurl + '/movie/' + movieId, {headers: this.httpHeaders});
   }
 
   getMovieById(movieId: number): Observable<any>{
     const data = {'movieId': movieId};
     return this.http.post(this.baseurl + '/getMovieById/', data, {headers: this.httpHeaders});
+  }
+
+  getMovieLink(movieId: number): Observable<any>{
+    const data = {'movieId': movieId};
+    return this.http.post(this.baseurl + '/getMovieLinks/', data, {headers: this.httpHeaders});
   }
 
   getMovieList(username: string): Observable<any>{
@@ -49,6 +46,11 @@ export class ApiService {
   getMovieRecs(username: string): Observable<any>{
     const data = { 'username': username };
     return this.http.post(this.baseurl + '/recommendByGenre_Liked/', data, {headers: this.httpHeaders});
+  }
+
+  getGenreTop(genre: string): Observable<any>{
+    const data = { 'genre': genre };
+    return this.http.post(this.baseurl + '/getMoviesByGenre/', data, {headers: this.httpHeaders});
   }
 
   addMovie(movieId: number, username: string) {
