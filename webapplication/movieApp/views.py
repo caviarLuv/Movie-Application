@@ -235,5 +235,16 @@ def addMovieComment(request):
 	else:
 		return Response({"Error, Comment not added"}, status=status.HTTP_400_BAD_REQUEST)
 
-
+@api_view(['POST'])
+def addMovieRating(request):
+	movieId = request.data['movieId']
+	username = request.data['username']
+	rating = request.data['rating']
+	timestamp = request.data['timestamp']
+	conn = db_conn()
+	result = conn.movieApp.ratings.insert_one({"userId": username, "movieId": movieId, "rating": rating, "timestamp": timestamp})
+	if result.acknowledged:
+		return Response({"rating inserted"}, status=status.HTTP_200_OK)
+	else:
+		return Response({"rating insertion fail"}, status=status.HTTP_400_BAD_REQUEST)
 

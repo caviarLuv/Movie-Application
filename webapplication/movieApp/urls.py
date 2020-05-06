@@ -28,5 +28,6 @@ urlpatterns = [
 	url(r'^getLikedGenres/', views.getLikedGenres),
 	url(r'^getSimilarMovies/', views.getSimilarMovies),
 	url(r'^getusermovielist/',views.getMovieList),
-	url(r'^addMovieComment/',views.addMovieComment)
+	url(r'^addMovieComment/',views.addMovieComment),
+	url(r'^addMovieRating/',views.addMovieRating)
 ]
