@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-movie',
@@ -20,6 +21,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   movieId;
   movieLink: string;
   imdbLink: string;
+  hasComments = false;
 
   constructor(
     private api: ApiService,
@@ -47,6 +49,8 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.api.getMovieById(movieId).subscribe(
         data => {
           this.movie = JSON.parse(data);
+          console.log(this.movie);
+          if (this.movie[0].comments !== undefined) {this.hasComments = true; }
           this.getSimilarMovies();
           this.getMovieLink();
         }
@@ -72,6 +76,20 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     addMovie() {
       this.api.addMovie(this.movieId, localStorage.getItem('username'));
+    }
+
+    addComment(form: NgForm) {
+      this.api.addComment(this.movieId, localStorage.getItem('username'), form.value.comment).subscribe(
+        data => {
+          console.log(data);
+          this.router2.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router2.navigate(['/movie/' + this.movieId]);
+          });
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
 
     getSimilarMovies() {
