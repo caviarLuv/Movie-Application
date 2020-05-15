@@ -1,0 +1,7 @@
+<mat-list>
+  <div mat-subheader>Profile Page</div>
+  <mat-list-item *ngFor="let user of userdata">
+    <div mat-line>{{user.username}}'s profile page</div>
+    <div mat-line>Liked Genres: {{user.liked_genres}}</div>
+  </mat-list-item>
+</mat-list>

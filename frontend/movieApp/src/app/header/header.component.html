@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/">
+    <mat-icon mat-list-icon>local_movies</mat-icon>
+    FlixList
+  </a>
+  <form (submit)="onSearch(searchForm)" #searchForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        name="searchTitle"
+        ngModel
+        type="text"
+        placeholder="Search for Movie"
+      />
+    </mat-form-field>
+  </form>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="/login" routerLinkActive="mat-accent"
+            >Login</a
+        >
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="/signup" routerLinkActive="mat-accent"
+            >Signup</a
+        >
+    </li>
+    <li *ngIf="userIsAuthenticated">
+        <button mat-button (click)="onLogout()">Logout</button>
+    </li>
+
+    <li *ngIf="userIsAuthenticated">
+        <button mat-button (click)="viewProfile()">My Movies</button>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="viewProfilePage()">Profile</button>
+  </li>
+  </ul>
+</mat-toolbar>

@@ -14,6 +14,10 @@ whitenoise = "*"
 psycopg2-binary = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+djangorestframework-jwt = "*"
+datetime = "*"
+py-bcrypt = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.7"
